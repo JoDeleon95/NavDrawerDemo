@@ -29,18 +29,21 @@ public class MainActivity extends AppCompatActivity
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+        Snackbar
+            .make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
             .setAction("Action", null).show();
       }
     });
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        this, drawer, toolbar, R.string.navigation_drawer_open,
+        R.string.navigation_drawer_close);
     drawer.addDrawerListener(toggle);
     toggle.syncState();
 
-    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+    NavigationView navigationView = (NavigationView) findViewById(
+        R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
   }
 
@@ -79,30 +82,34 @@ public class MainActivity extends AppCompatActivity
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
     Bundle args = new Bundle();
-    switch (item.getItemId()){
+    switch (item.getItemId()) {
       case R.id.fragment_1:
-        loadFragment(new Fragment1(), R.id.fragment_container, "fragment1", null);
+        loadFragment(new Fragment1(), R.id.fragment_container, "fragment1",
+            null);
         break;
       case R.id.fragment_2:
-        loadFragment(new Fragment2(), R.id.fragment_container, "fragment2", null);
+        loadFragment(new Fragment2(), R.id.fragment_container, "fragment2",
+            null);
         break;
       case R.id.fragment_2a:
         args.putString(Fragment2.BODY_TEXT_KEY, "Here comes another one.");
-        loadFragment(new Fragment2(), R.id.fragment_container, "fragment2a", args);
+        loadFragment(new Fragment2(), R.id.fragment_container, "fragment2a",
+            args);
         break;
     }
+
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
   }
 
-  public void loadFragment(Fragment fragment, int container, String tag, Bundle args){
+  public void loadFragment(Fragment fragment, int container, String tag,
+      Bundle args) {
     FragmentManager manager = getSupportFragmentManager();
     if (args != null) {
       fragment.setArguments(args);
     }
-    manager.beginTransaction()
-        .add(container, fragment, tag)
+    manager.beginTransaction().add(container, fragment, tag)
         .commit();
   }
 }
